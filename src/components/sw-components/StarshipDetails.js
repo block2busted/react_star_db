@@ -1,80 +1,40 @@
 import React from "react";
 import ItemDetails, { Record } from "../ItemDetails";
-import { SwapiServiceConsumer } from "../SwapiServiceContext/SwapiServiceContext";
-
+import withSwapiService from "../hoc-helpers/withSwapiService";
 
 //itemId={this.state.selectedPerson}
 
-const PersonDetails = ({itemId}) => {
+// or
+// const StarshipDetails = (props) => {
+//     return (
+//         <ItemDetails {...props} >
+//             <Record field='starshipClass' label='Starship class'/>
+//             <Record field='model' label='Model'/>
+//         </ItemDetails>
+//     )
+// };
+
+
+
+const StarshipDetails = ({itemId, getData, getImageUrl}) => {
     return (
-        <SwapiServiceConsumer>
-            {
-                ({ getPerson, getPersonImageUrl }) => {
-                    return (
-                        <ItemDetails
-                            itemId={itemId}
-                            getData={getPerson}
-                            getImageUrl={getPersonImageUrl}>
-                            
-                            <Record field='gender' label='Gender'/>
-                            <Record field='hairColor' label='Hair Color'/>
-                            <Record field='height' label='Height'/>
-                            <Record field='mass' label='Mass'/>
-                        </ItemDetails>
-                    )
-                }
-            }
-        </SwapiServiceConsumer>
+        <ItemDetails
+            itemId={itemId}
+            getData={getData}
+            getImageUrl={getImageUrl}>
+
+            <Record field='starshipClass' label='Starship class'/>
+            <Record field='model' label='Model'/>
+        </ItemDetails>
     )
 };
 
 
-const PlanetDetails = ({itemId}) => {
-    return(
-        <SwapiServiceConsumer>
-            {
-                ({ getPlanet, getPlanetImageUrl }) => {
-                    return (
-                        <ItemDetails
-                            itemId={itemId}
-                            getData={getPlanet}
-                            getImageUrl={getPlanetImageUrl}>
+const mapMethodsToProps = (swapiService) => {
+    return {
+        getData: swapiService.getStarship,
+        getImageUrl: swapiService.getStarshipImageUrl
+    }
+}
 
-                            <Record field='population' label='Population'/>
-                            <Record field='rotationPeriod' label='Rotation period'/>
-                            <Record field='climate' label='Climate'/>
-                        </ItemDetails>
-                    );
-                }
-            }
-        </SwapiServiceConsumer>
-    )
-};
-
-
-const StarshipDetails = ({itemId}) => {
-    return (
-        <SwapiServiceConsumer>
-            {
-                ({ getStarship, getStarshipImageUrl }) => {
-                    return (
-                        <ItemDetails
-                            itemId={itemId}
-                            getData={getStarship}
-                            getImageUrl={getStarshipImageUrl}>
-
-                            <Record field='starshipClass' label='Starship class'/>
-                            <Record field='model' label='Model'/>
-                        </ItemDetails>
-                    )
-                }
-            }
-        </SwapiServiceConsumer>
-    )
-};
-
-export {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails
-};
+export default withSwapiService(StarshipDetails, mapMethodsToProps);
