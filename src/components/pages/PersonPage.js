@@ -1,27 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import { PersonDetails, PersonList } from "../sw-components";
 import Row from "../Row";
 
 
-export default class PersonPage extends Component {
+const PersonPage = ({ history, match }) => {
+    const { id } = match.params
 
-    state = {
-        selectedItem: null
-    }
-
-    onItemSelected = (selectedItem) => {
-        this.setState({selectedItem})
-    }
-
-    render() {
-        const { selectedItem } = this.state
-
-        return(
-            <Row
-                leftBar={<PersonList onItemSelected={this.onItemSelected} />}
-                rightBar={<PersonDetails itemId={selectedItem} />}
-            />
+    return(
+        <Row
+            leftBar={<PersonList onItemSelected={(id) => history.push(id)} />}
+            rightBar={<PersonDetails itemId={id} />}
+        />
         )
-    }
-
 }
+
+export default withRouter(PersonPage);

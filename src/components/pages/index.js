@@ -1,7 +1,13 @@
-import { PersonPage, PlanetPage, StarshipPage} from "./PersonPage";
+import PersonPage from "./PersonPage";
+import PlanetPage from "./PlanetPage";
+import StarshipPage from "./StarshipPage";
+import SecretPage from "./SecretPage";
+import LoginPage from "./LoginPage"
 
-export default {
+export {
     PersonPage,
     PlanetPage,
-    StarshipPage
+    StarshipPage,
+    SecretPage,
+    LoginPage
 }

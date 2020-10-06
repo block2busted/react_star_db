@@ -1,7 +1,13 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 
 export default class Row extends Component {
+
+    static propTypes = {
+        leftBar: PropTypes.node,
+        rightBar: PropTypes.node
+    }
+
     render() {
         const { leftBar, rightBar } = this.props
 
