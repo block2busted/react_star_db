@@ -1,0 +1,9 @@
+.planet-image {
+    height: 150px;
+}
+
+.planet-data {
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center
+}
